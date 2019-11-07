@@ -16,9 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - Descargate el  dataset hip con el siguiente comando
 
 ```{r}
-library(httr)
-set_config(config(ssl_verifypeer = 0L))
-hip  <- read.table("https://astrostatistics.psu.edu/datasets/HIP_star.dat", header=T,fill=T)
+hip  <- read.table("./HIP_star.dat", header=T,fill=T)
 ```
 
 - Una vez descargado comprueba la dimensión y los nombres de las columnas del dataset. ¿Qué dimensión tiene? ¿qué tipo de datos alberga? (e.g. 4 variables numéricas continuas)
