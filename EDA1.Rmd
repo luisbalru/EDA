@@ -20,10 +20,16 @@ hip  <- read.table("./HIP_star.dat", header=T,fill=T)
 ```
 
 - Una vez descargado comprueba la dimensión y los nombres de las columnas del dataset. ¿Qué dimensión tiene? ¿qué tipo de datos alberga? (e.g. 4 variables numéricas continuas)
-
+Podemos ver toda esa información  con la función **str**
+```{r}
+str(hip)
+```
+9 variables, 8 flotantes y una entera. 2719 filas y 9 columnas.
 
 - Muestra por pantalla la columna de la variable RA
-
+```{r}
+hip['RA']
+```
 
 - Calcula las tendencias centrales de todos los datos del dataset (mean, media) utilizando la function apply
 
