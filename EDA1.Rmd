@@ -138,3 +138,9 @@ Como has observado  nos devuelve NA para toda la columna,  normalmente querríam
  “The data are very highly correlated and scatterplot matrices and brush plots [i.e. interactive graphics] are none too revealing.”. 
 
 Utilizando gráficos generales, comente si la transformación logaritmica fue una buena idea y si está de acuerdo con su afirmación sobre las correlaciones.
+
+
+# 2. Como crear subgrupos de datos en R
+
+# 3. Como ordenar tablas (dplyr)
+
