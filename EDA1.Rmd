@@ -32,14 +32,23 @@ hip['RA']
 ```
 
 - Calcula las tendencias centrales de todos los datos del dataset (mean, media) utilizando la function apply
-
+```{r}
+sapply(hip,mean,na.rm=T)
+sapply(hip,median,na.rm=T)
+```
 
 - Haz lo mismo para las medidas de dispersión mínimo y máximo. ¿Seria posible hacerlo con un único comando?¿Que hace la función range()?
-
+```{r}
+sapply(hip,range,na.rm=T)
+```
 
 
 - Sin embargo las medidas mas populares de dispersión son la varianza (var()), su desviación standard (sd()) y la desviación absoluta de la mediana o MAD. Calcula estas medidas para los valores de RA.
-
+```{r}
+sapply(hip['RA'],var,na.rm=T)
+sapply(hip['RA'],sd,na.rm=T)
+sapply(hip['RA'],mad,na.rm=T)
+```
 
 
 - Imagina que quieres calcular dos de estos valores de una sola vez. ¿Te serviría este código?
@@ -48,17 +57,27 @@ hip['RA']
 f = function(x) c(median(x), mad(x))  
 f(hip[,3])
 ```
+Sí salvo por los valores perdidos
 
 - ¿Cuál sería el resultado de aplicar apply(hip,2,f)?
-
+```{r}
+apply(hip,2,f)
+```
+Calcularía el resultado de la función (cálculo de la mediana y el mad) por variables.
 
 - Vamos a medir la dispersión de la muestra utilizando el concepto de cuartiles. El percentil 90 es aquel dato que excede en un 10% a todos los demás datos. El cuartil (quantile) es el mismo concento, solo que habla de proporciones en vez de porcentajes. De forma que el percentil 90 es lo mismo que el cuartil 0.90. La mediana “median” de un dataset es el valor más central, en otras palabras exactamente la mitad del dataset excede la media. Calcula el cuartil .10 y .50 para la columna RA del dataset hip. Sugerencia: quantile()
+```{r}
+quantile(hip['RA'], probs = seq(0,1,0.1), na.rm=T)[2]
+quantile(hip['RA'], probs = seq(0,1,0.1), na.rm=T)[6]
+```
 
 - Los cuantiles 0.25 y 0.75 se conocen como el  first quartile y el third quartile, respectivamente. Calcula los cuatro cuartiles para RA con un único comando.
-
+```{r}
+quantile(hip['RA'],na.rm=T)
+```
 
 - Otra medida de dispersion es la diferencia entre el primer y el tercer cuartil conocida como rango intercuartil (IQR) Inter Quantile Range. ¿Obtienes ese valor con la función summary()?
-
+No directamente pero sí te da el valor del primer y tercer cuartil, así que podemos calcularlo fácilmente haciendo la diferencia.
 
 - Hasta ahora has ignorado la presencia de  valores perdidos NA. La función any() devuelve TRUE si se encuentra al menos un TRUE en el vector que damos como argumento. Su combinación con is.na es muy útil. ¿qué obtienes cuando ejecutas el siguiente comando? ¿Cómo lo interpretas?
 
@@ -66,25 +85,39 @@ f(hip[,3])
  hasNA = function(x) any(is.na(x)) 
 apply(hip,2,hasNA)
 ```
+Devuelve si existe algún valor perdido en cada variable
 
 - Prueba a ejecutar el siguiente comando.
 
 ```{r}
-min(B.V)
+min(hip['B.V'])
 hip1 = na.omit(hip)
 ```
 
 Como has observado  nos devuelve NA para toda la columna,  normalmente querríamos poder usar la función sobre el resto de datos que no son NA: Para ello podemos utilizar la función na.omit. ¿Que ocurre cuando lo hacemos?. Usando apply calcula la media para hip. Intenta calcular la media de forma que solo cambie la de B.V cuando ignores los valores NA.
-
+**na.omit** Omite aquellas filas que contienen un NA.
+```{r}
+sapply(hip1,mean)
+```
 - Obten una idea aproximada de tus datos mediante la creación de un boxplot del hip dataset
+```{r}
+boxplot(hip)
+```
 
 - Crea un scatterplot que te compare los valores de RA y DE. Representa los puntos con el símbolo ‘.’ Y que estos puntos sean de color rojo si DE excede de 0. Sugerencia ifelse()
 
-
+```{r}
+plot(hip$RA,hip$DE,col = ifelse(hip$DE>0,"red","blue"),xlab="RA",ylab="DE")
+```
 
 - Haz un scatterplot de RA y pmRA. ¿Ves algún patrón?
-
+```{r}
+plot(hip$RA,hip$pmRA,xlab="RA",ylab="pmRA")
+```
 - En vez de crear los plots por separado para cada par de columnas, hazlos con un solo comando con el scatterplot matrix.
+```{r}
+pairs(~hip$RA+hip$DE+hip$pmRA)
+```
 
 - Para poder acceder a las variables por su nombre usa attach(hip).Vamos a seleccionar las estrellas Hyadas del dataset aplicando los siguientes filtros:
     • RA in the range (50,100) 
@@ -99,6 +132,10 @@ Como has observado  nos devuelve NA para toda la columna,  normalmente querríam
 ## b) EJEMPLO 2, irisdataset
 
 - Inspecciona las primeras filas del dataset y calcula el summary() del mismo con cada atributo del dataset
+```{r}
+head(iris)
+summary(iris)
+```
 
 - Crea un histograma de petal.width , teniendo en cuenta que el numero de bins es variable fija este a 9. Añádele color y nombres al eje x "Petal Width"y al gráfico dale el nombre de  "Histogram of Petal Width". Crea un histograma para cada variable.
 
