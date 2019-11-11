@@ -1,0 +1,42 @@
+---
+title: "Gráficos en R"
+author: "Luis Balderas Ruiz"
+date: "11/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# EJERCICIO 1
+
+Plot distance against stretch.
+
+```{r}
+
+library("ggplot2")
+stretch = c(46,54,48,50,44,42,52)
+distance = c(148,182,173,166,109,141,166)
+datos = data.frame(stretch,distance)
+
+p = ggplot(datos, aes(x=datos$stretch, y=datos$distance))
+p = p + geom_point()
+p
+```
+
+# EJERCICIO 2
+The table on the right have ten observations, taken during the years 1970-79, are on October snow cover for Eurasia (snow cover is in millions of square kilometers).
+
+- Plot snow.cover versus year
+- Plot a histogram of the snow.cover values.
+
+```{r}
+year = 1970:1979
+snow.cover = c(6.5,12.0,14.9,10.0,10.7,7.9,21.9,12.5,14.5,9.2)
+tabla = data.frame(year,snow.cover)
+p = ggplot(tabla, aes(x=tabla$year, y=tabla$snow.cover))
+p = p + geom_point()
+p
+```
+
