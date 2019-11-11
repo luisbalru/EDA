@@ -68,3 +68,11 @@ data$maximum.temerature = FahrenheittoCelsius(data$maximum.temerature)
 data$minimum.temperature = FahrenheittoCelsius(data$minimum.temperature)
 data$average.temperature = FahrenheittoCelsius(data$average.temperature)
 ```
+
+A continuación, hacemos los plots requeridos:
+```{r}
+df = data.frame(nombres=c("Warmest MT", "Coldest Minimum Temperature"), temp = c(max(data$minimum.temperature), min(data$minimum.temperature)))
+head(df)
+p = ggplot(data=df,aes(x=df$nombres, y=df$temp)) + geom_bar(stat="identity", fill = "steelblue",width = 0.5) + theme_minimal() + labs(title="Ejercicio 3", x="Categoría", y="Temperatura")
+p
+```
