@@ -37,6 +37,42 @@ snow.cover = c(6.5,12.0,14.9,10.0,10.7,7.9,21.9,12.5,14.5,9.2)
 tabla = data.frame(year,snow.cover)
 p = ggplot(tabla, aes(x=tabla$year, y=tabla$snow.cover))
 p = p + geom_point()
+p = p + labs(title="Ejercicio 2", x="Year", y="Snow cover")
 p
 ```
+```{r}
+q = ggplot(tabla, aes(tabla$snow.cover)) + geom_histogram(binwidth=2)
+q
+```
 
+# EJERCICIO 3
+
+Given the data in NY.xls
+
+- (Optional) convert ºF to ºC and in to mm.
+- Plot Year vs. Warmest Minimum Temperature
+- Plot Year vs. Warmest Minimum Temperature and Coldest Minimum Temperature. Don’t forget to add a legend!
+
+Defino una función para transformar las temperaturas de grados Fahrenheint a Centígrados:
+```{r}
+FahrenheittoCelsius = function(c){
+  return((c-32)*(5/9))
+}
+```
+
+A continuación, transformo las columnas que contienen temperatura:
+
+```{r}
+data = read.csv("weather_data_nyc_centralpark_2016.csv")
+data$maximum.temerature = FahrenheittoCelsius(data$maximum.temerature)
+data$minimum.temperature = FahrenheittoCelsius(data$minimum.temperature)
+data$average.temperature = FahrenheittoCelsius(data$average.temperature)
+```
+
+A continuación, hacemos los plots requeridos:
+```{r}
+df = data.frame(nombres=c("Warmest MT", "Coldest Minimum Temperature"), temp = c(max(data$minimum.temperature), min(data$minimum.temperature)))
+head(df)
+p = ggplot(data=df,aes(x=df$nombres, y=df$temp)) + geom_bar(stat="identity", fill = "steelblue",width = 0.5) + theme_minimal() + labs(title="Ejercicio 3", x="Categoría", y="Temperatura")
+p
+```
