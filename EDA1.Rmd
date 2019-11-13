@@ -166,14 +166,22 @@ outlier.shape=8, outlier.size=4)
 
 
 - Crea los boxplot de la longitud del pétalo en función de la especie de Iris.
-
+```{r}
+iris %>% group_by(Species) %>% ggplot(aes(x=Species,y=Petal.Length,fill=Species)) + geom_boxplot(outlier.colour="red",
+outlier.shape=8, outlier.size=4)
+```
 - Compara con scatter plots las variables entre sí.
 
 - Crea una nueva columna llamada proporción que es el ratio entre Sepal.Length y Sepal.Width. Podeis hacerlo en R base o usando el paquete dplyr. Los que no lo conozcan tienen información al final del documento.
-
+```{r}
+iris = iris %>% mutate(Proportion = Sepal.Length/Sepal.Width)
+str(iris)
+```
 
 - El conjunto de datos “swiss” contiene una medida estandarizada de fecundidad y varios indicadores socioeconómicos para cada una de las 47 provincias francófonas de Suiza. 
-  1. ¿Qué diagrama dibujaría para mostrar la distribución de todos los valores? ¿Qué conclusiones sacarías? 
+
+  1. ¿Qué diagrama dibujaría para mostrar la distribución de todos los valores? ¿Qué conclusiones sacarías?
+  
   2. Dibuje gráficos para cada variable. ¿Qué puede concluir de las distribuciones con respecto a su forma y posibles valores atípicos? 
   3. Dibuja un diagrama de dispersión de Fertilidad frente a % Catholic. ¿Qué tipo de áreas tienen las tasas de fertilidad más bajas? 
   4.¿Qué tipo de relación existe entre las variables Educación y Agricultura?
