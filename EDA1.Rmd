@@ -102,6 +102,8 @@ sapply(hip1,mean)
 - Obten una idea aproximada de tus datos mediante la creación de un boxplot del hip dataset
 ```{r}
 boxplot(hip)
+boxplot(hip, ylim=c(-200,600))
+boxplot(hip,ylim=c(-1,10))
 ```
 
 - Crea un scatterplot que te compare los valores de RA y DE. Representa los puntos con el símbolo ‘.’ Y que estos puntos sean de color rojo si DE excede de 0. Sugerencia ifelse()
@@ -201,7 +203,8 @@ p
 ```
 
 - El conjunto de datos de aceites de oliva es bien conocido y se puede encontrar en varios paquetes, por ejemplo, como aceitunas en extracat.. La fuente original de los datos es el artículo [Forina et al., 1983]. 
-  1. Dibuje un scatterplot  de las ocho variables continuas. ¿Cuáles de los ácidos grasos están fuertemente asociados positivamente y cuáles fuertemente asociados negativamente? 
+  1. Dibuje un scatterplot  de las ocho variables continuas. ¿Cuáles de los ácidos grasos están fuertemente asociados positivamente y cuáles fuertemente asociados negativamente?
+  
   2. ¿Hay valores atípicos u otras características que valga la pena mencionar?
 
 - El conjunto de datos se llama Lanza del paquete HSAUR2. 
