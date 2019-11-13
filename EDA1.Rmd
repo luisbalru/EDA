@@ -129,6 +129,14 @@ pairs(~hip$RA+hip$DE+hip$pmRA)
     
 - Crea un nuevo dataset con la aplicación de estos filtro. El Nuevo dataset se llama hyades. ¿Que dimensiones tiene? Grafica un scatterplot de Vmag vs B.V.
 
+```{r}
+library(tidyverse)
+hyades = hip %>% filter((RA < 100 & RA < 50 & DE < 25 & DE > 0 & pmRA < 130 & pmRA > 90 & pmDE > -60 & pmDE < -10 & e_Plx < 5) & (Vmag > 4 | B.V < 0.2))
+str(hyades)
+ggplot(hyades, aes(x=B.V, y=Vmag)) + geom_point()
+```
+
+
 ## b) EJEMPLO 2, irisdataset
 
 - Inspecciona las primeras filas del dataset y calcula el summary() del mismo con cada atributo del dataset
