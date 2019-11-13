@@ -146,10 +146,21 @@ summary(iris)
 ```
 
 - Crea un histograma de petal.width , teniendo en cuenta que el numero de bins es variable fija este a 9. Añádele color y nombres al eje x "Petal Width"y al gráfico dale el nombre de  "Histogram of Petal Width". Crea un histograma para cada variable.
-
+```{r}
+ggplot(iris, aes(x=Petal.Width,fill=Species,colors=Species)) + geom_histogram(bins = 9, position='dodge') + ggtitle("Histogram of Petal Width") + theme(legend.position="top")
+```
 - Crea los cuartiles del dataset.
 
+```{r}
+quantile(iris$Petal.Width,na.rm = T)
+```
+
 - Representa en un boxplot la variable de ancho de hoja dependiendo del tipo de hoja que tengan.
+
+```{r}
+iris %>% group_by(Species) %>% ggplot(aes(x=Species,y=Petal.Width,fill=Species)) + geom_boxplot(outlier.colour="red",
+outlier.shape=8, outlier.size=4)
+```
 
 - Crea los cuartiles para cada tipo de iris y represéntalos en un plot como líneas cada una de un color. 
 
