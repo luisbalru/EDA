@@ -183,8 +183,22 @@ str(iris)
   1. ¿Qué diagrama dibujaría para mostrar la distribución de todos los valores? ¿Qué conclusiones sacarías?
   
   2. Dibuje gráficos para cada variable. ¿Qué puede concluir de las distribuciones con respecto a su forma y posibles valores atípicos? 
+```{r}
+pairs(~swiss$Fertility+swiss$Agriculture+swiss$Examination)
+```
   3. Dibuja un diagrama de dispersión de Fertilidad frente a % Catholic. ¿Qué tipo de áreas tienen las tasas de fertilidad más bajas? 
+```{r}
+p = ggplot(swiss, aes(x=Catholic,y=Fertility)) + geom_point() + ggtitle("Catholic vs Fertility")
+p
+```
+
   4.¿Qué tipo de relación existe entre las variables Educación y Agricultura?
+```{r}
+relation_educ_agric = cov(swiss$Agriculture,swiss$Education)
+relation_educ_agric
+p = ggplot(swiss,aes(x=Agriculture,y=Education)) + geom_point() + stat_smooth()
+p
+```
 
 - El conjunto de datos de aceites de oliva es bien conocido y se puede encontrar en varios paquetes, por ejemplo, como aceitunas en extracat.. La fuente original de los datos es el artículo [Forina et al., 1983]. 
   1. Dibuje un scatterplot  de las ocho variables continuas. ¿Cuáles de los ácidos grasos están fuertemente asociados positivamente y cuáles fuertemente asociados negativamente? 
